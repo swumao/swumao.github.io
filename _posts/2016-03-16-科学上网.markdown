@@ -1,0 +1,53 @@
+---
+layout: post
+title:  "科学上网简单说明"
+date:   2016-03-16 13:17:00 +0800
+categories: swumao update
+---
+前几天sae发邮件通知下个月开始要收费使用了！作为穷屌丝的我，一来确实觉得sae的wordpress不是很好用，二来又要开始收费使用，三来慕名github pages很久了，一直没机会迁移过来，所以当我看到邮件的时候就立即下了决心要迁移到pages来。
+
+迁移过来有个好处，就是以前在sae上面的科学上网教程（被我删掉了，由于怕怕...）不敢放，在这里就敢放了，但还是要低调低调...
+
+以前备份在本地的文章找不到了，想想也没什么，就自己去ss官网看了看文档啥的，开始搞了。
+
+中午吃饭时终于通了，在这里记录下！
+
+## 准备材料
+
+- 一个海外的VPS，我选用的是香港的VPS，在某宝购买的最低配置，价钱29/月。
+- 一个shadowsocks客户端
+
+## 服务器设置
+
+- 记得选择操作系统是linux，具体是哪个发行版不是很要紧，我这里选择的是ubuntu14.04
+- `ssh -l root your-vps-ip-address`登录到vps。
+- 使用pip安装shadowsocks，下面是ubuntu下的安装命令：
+        {% highlight bash %}
+        apt-get update
+        apt-get install pip
+        # 下面的命令是确认下python的版本，貌似shadowsocks只支持python2.6和python2.7
+        python --version
+        pip install shadowsocks
+        {% endhighlight %}
+- 创建配置文件。配置文件简单说就是一个json文件，放在哪不要紧，执行命令的时候能找到就可以了。我把配置文件放在了/root目录下。命令如下：
+        {% highlight bash %}
+        touch shadowsocks.json
+        vi shadowsocks.json
+        {% endhighlight %}
+文件内容格式为(具体的解释在这里[shadowsocks官网](https://shadowsocks.org/en/config/quick-guide.html "shadowsocks.org")):
+        {% highlight json %}
+        {
+            "server":"my_server_ip",
+            "server_port":8388,
+            "local_port":1080,
+            "password":"barfoo!",
+            "timeout":600,
+            "method":"table"
+        }
+        {% endhighlight %}
+
+## 启动服务
+- 启动ssserver服务，启动服务的命令就是`ssserver`，具体用法可以直接输入命令名称查看帮助。我的用法是`ssserver -c shadowsocks.json -d start`
+
+## 客户端使用
+- 客户端配置，shadowsocks提供多种平台的客户端，我以android手机客户端为例进行说明，其他平台类似，所有客户端都可以在[sshadowsocks.org](https://shadowsocks.org)下载到。在客户端上，需要新增一个配置，采用手动方式添加，输入远程服务器ip，端口，本地端口，服务器密码，加密方法，保存后进行连接就可以了。这些参数都是上面第4步设置的时候写的。如果你想要修改，也可以在服务器上修改之后重启服务。然后此时不出意外就可以上网了。
