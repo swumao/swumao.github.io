@@ -9,6 +9,10 @@ dl, dd, ol, ul, figure {
 }
 
 
+html{
+    color: #212121;
+}
+
 
 /**
  * Basic styling
@@ -16,13 +20,21 @@ dl, dd, ol, ul, figure {
 body {
     font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
     color: $text-color;
-    background-color: $background-color;
+    // background-color: $background-color;
+    background-color: #eeeeee;
     -webkit-text-size-adjust: 100%;
     -webkit-font-feature-settings: "kern" 1;
     -moz-font-feature-settings: "kern" 1;
     -o-font-feature-settings: "kern" 1;
     font-feature-settings: "kern" 1;
     font-kerning: normal;
+    font-size: 1.4rem;
+    line-height: 1.71429;
+    font-family: "Microsoft Yahei";
+}
+
+footer, header{
+    display: block;
 }
 
 
@@ -197,4 +209,43 @@ pre {
     path {
         fill: $grey-color;
     }
+}
+
+.button:link{
+    font-size: 14px;
+    background: #088ef0;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0, .12), 0 2px 2px rgba(0,0,0, .24);
+    color: #fff;
+    display: inline-block;
+    height: 36px;
+    line-height: 2.57143;
+    min-width: 88px;
+    padding: 0 16px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: .2s;
+    white-space: nowrap;
+}
+
+.button:hover, button:visited{
+    font-size: 14px;
+    background: #9ad824;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0, .12), 0 2px 2px rgba(0,0,0, .24);
+    color: #fff;
+    display: inline-block;
+    height: 36px;
+    line-height: 2.57143;
+    min-width: 88px;
+    padding: 0 16px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: .2s;
+    white-space: nowrap;
+}
+
+a.button{
+    text-decoration: none;
+    color: #fff;
 }

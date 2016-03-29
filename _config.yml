@@ -15,6 +15,6 @@ url: "http://malatoday.com" # the base hostname & protocol for your site
 github_username:  swumao
 weibo_username: 西南喵喵
 weibo_userid: 3913151499
-
+background-color: #EEEEEE
 # Build settings
 markdown: kramdown
