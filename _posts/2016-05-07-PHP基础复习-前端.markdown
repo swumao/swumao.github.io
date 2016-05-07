@@ -1,0 +1,194 @@
+---
+layout: post
+title:  "PHP基础复习-前端"
+date:   2016-05-07 09:54:00 +0800
+categories: swumao update
+---
+> 这个系列的文章将会复习总结PHP的一些基础知识，包括了前端的简要介绍，数据库，php语法，框架等。
+
+## HTML
+
+HTML 全称是超文本标记语言，用成对的标签（也有一些例外）包裹内容，从而可以让浏览器识别并显示出来。
+
+下面用代码的形式列举一些平时用到的比较多的标签，关于标签的具体东西可以去查阅相关文档了解。
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML常用标记</title>
+    </head>
+    <body>
+        <h1>这是一级标题</h1>
+        <h2>这个是二级标题</h2>
+        <p>
+            这个是段落标记，标题标记一共有6个，可以从h1->h6。
+        </p>
+        <p>
+            接下来是另外两个常用的标记，有序列表（ol）和无序列表（ul）
+            <ul>
+                <li>无序列表第一项</li>
+                <li>无序列表第二项</li>
+            </ul>
+            <ol>
+                <li>有序列表第一项</li>
+                <li>有序列表第二项</li>
+                <li>
+                    <ul>
+                        <li>标记之间也可以互相嵌套</li>
+                        <li>不信你试试</li>
+                    </ul>
+                </li>
+            </ol>
+        </p>
+        <!--这里是注释，下面的hr标记会在浏览器中显示一条分割线-->
+        <hr />
+        <p>
+            接下来是表格标记table，为了方便查看，加上了边框线
+            <table border="1">
+                <thead>
+                    <th>
+                        第一个表头
+                    </th>
+                    <th>
+                        第二个表头
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            第一行的第一项
+                        </td>
+                        <td>
+                            第一行的第二项
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            第二行
+                        </td>
+                        <td>
+                            第二行的第二项
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            合并了两个单元格
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            再试试
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        <!--br标签用来换行-->
+        <br />
+        <p>
+            接下来是表单（form）标记,action属性指的是表单被提交时提交到哪里，method表示提交时发送的http请求以何种方式发送。
+            <form action="index.html" method="post">
+                <p>
+                    <!--这里的name属性后面遇到使用的时候再说-->
+                    <input type="text" name="name" value="" placeholder="输入姓名">
+                </p>
+                <p>
+                    <input type="password" name="name" value="" placeholder="输入密码">
+                </p>
+                <!--表单还有很多其他的标记，具体可以上网找找看，这里就不写了-->
+                <p>
+                    <input type="submit" name="name" value="提交">
+                </p>
+            </form>
+        </p>
+        <p>
+            还有一个标记，表示超链接的标记
+            <a href="#">你看我是不是不一样</a>
+        </p>
+        <!--html标记暂且先介绍到这里，最好有空去看一下文档多了解下-->
+    </body>
+</html>
+```
+
+## CSS
+
+通过以上内容可以看出来，html描述了网页内容的结构，但是人们在浏览网页的时候不仅仅需要内容，还需要美观的界面，这个时候就需要用css来控制样式了。
+
+CSS叫层叠样式表，个人理解这个层叠式因为后面的样式会覆盖前面的样式，这里介绍css只是为了方便我们后面写代码的时候遇到相应的代码不会一脸懵逼，所以不会专门介绍css的内容，未来有空专门学习下css再接着写。
+
+css在网页中存在大概有这么三种方式，如下代码：
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <!--style标签是另外一种方式写css代码-->
+        <style media="screen">
+            p{
+                background-color: #ccc;
+            }
+        </style>
+        <!--最为推荐的方式是将css代码写到单独的文件中去-->
+        <link rel="stylesheet" href="/css/master.css">
+    </head>
+    <body>
+        <p style="width:300px;height:500px">
+            这个就是第一种方式了，直接在html标记的style属性中写
+        </p>
+        <p>
+            未来的代码中我们还会经常见到另外两个标记
+            <div class="post">
+                <span>hahah</span>
+            </div>
+            div标记和span标记本身并没有特别的语义，比如不像h1标签代表了标签里面的内容是标题。
+
+            他们只是用来包裹一些元素，方便css进行样式控制。
+
+            div标记是一个块级标记（它会单独占据一行），span标记是用来组合行内元素的标记。
+
+            关于这两个标记，最常见的属性是class属性和id属性，一般都用于css控制样式和js选择元素。
+        </p>
+    </body>
+</html>
+```
+
+## Javascript
+
+js是一个可以在浏览器端被解释执行的脚本语言。
+
+作为一个PHP程序员，感觉js也是必会的语言，由于三言两语讲不清楚，所以我这里只简单说下js在html里面的存在形式，如果想要学习请上网去找资源，尤其是阮一峰老师的js教程，非常推荐。
+
+直接看代码：
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <!--外部文件引入js代码，不仅可以放在head中，还可以放在body中-->
+        <script src="main.js"></script>
+        <script type="text/javascript">
+            var a = 1;
+            // 以这种方式直接在html文件里面写js代码，同样也可以放到body标记中。
+        </script>
+    </head>
+    <body>
+        <p onclick="alert('1')">
+            这个是第三种写js的方式
+        </p>
+    </body>
+</html>
+```
