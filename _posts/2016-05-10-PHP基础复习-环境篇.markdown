@@ -63,4 +63,4 @@ windows下为了省事，我们一般适用集成环境。所谓集成环境就�
 - wamp等集成软件安装目录下的www目录
 - /var/www/html目录
 
-甚至web根目录还可以由你自己随心所欲地设置，这个知识我归纳到了[PHP基础复习-VirtualHost配置]()一文中去了。
+甚至web根目录还可以由你自己随心所欲地设置，这个知识我归纳到了[PHP基础复习-VirtualHost配置](/swumao/update/php%E5%9F%BA%E7%A1%80/virtualhost/vhost/2016/05/07/PHP%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0-VirtualHost.html)一文中去了。
