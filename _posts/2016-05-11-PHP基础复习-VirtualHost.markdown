@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "PHP基础复习-VirtualHost"
-date:   2016-05-07 09:54:00 +0800
+date:   2016-05-11 09:54:00 +0800
 categories: swumao update PHP基础 VirtualHost vhost
 ---
 > 这个系列的文章将会复习总结PHP的一些基础知识，包括了前端的简要介绍，数据库，php语法，框架等。
