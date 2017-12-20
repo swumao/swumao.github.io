@@ -1,0 +1,73 @@
+----
+layout: post
+title: "gerrit推送命令"
+date:   2017-12-21 01:56:00 +0800
+categories: gerrit shell
+----
+
+一年多没有更新博客了，今天突发奇想，翻看了以前写的文章，骤觉之前的自己好蠢。参加工作这么长时间，每次想要归纳总结下自己到底成长了什么，学到了什么的时候总说不出来，特别憋屈。由此想到不如还是花一定的时间出来更新博客，以此记录自己的成长。
+
+本文介绍一个shell下的小命令，写这个命令的出发原因是手写gerrit的push命令太长了，举个例子：
+
+```bash
+git push origin HEAD:refs/for/master%r=zhangsan@lianjia.com,r=lisi@lianjia.com
+```
+
+也曾想过写一个alias简化输入，也有现成的插件可以直接在IDE中指定，还有同事通过git的相关设置自动加reviewers，但这些操作都没有解决一件事情，那就是在不同的项目中提交不同的代码时需要指定不同的reviewers时不太好办，现在工作中在使用的就是写死固定给所有人发，这样大家的体验会比较差，比如如果开通提醒功能，则会被大量的无关信息骚扰；如果关闭提醒功能则导致review不及时。因此需要一个既可以简化输入，又可以动态指定reviewers的小工具。
+
+用法
+```
+review all 
+review group1
+review user1
+review group1 user4
+```
+
+```bash
+review () {
+    if [ $# != 1 ];then
+        echo "Usage: review 组名或链家网邮箱前缀 [组名或链家网邮箱前缀...]"
+        echo "e.g.: review all"
+        return
+    fi
+    group=("all" "group1" "group2")
+    all=("user1" "user2" "user3" "user4" "user5")
+    group1=("user1" "user2")
+    group2=("user3" "user4" "user5")
+
+    declare a users
+    for i in ${@[@]:1}
+    do
+        if [[ ${group[@]/$i/} != ${group[@]} ]]; then
+            eval "group_name=(\$$i)"
+            for j in ${group_name[@]}
+            do
+                if [[ ${users[@]/$j/} == ${users[@]} ]];then
+                    users=(${users[@]} $j)
+                fi
+            done
+        else
+            if [[ ${users[@]/$i/} == ${users[@]} ]];then
+                users=(${users[@]} $i)
+            fi
+        fi
+    done
+
+    reviewers=""
+    for i in ${users[@]}
+    do
+        reviewers=${reviewers}"r="${i}"@lianjia.com,"
+    done
+
+    branch_name=`git rev-parse --abbrev-ref HEAD`
+    if [ -z "$branch_name" ];then
+        echo "! [Branch name missing]"
+        echo "请在git仓库根目录执行"
+        return
+    fi
+
+    push_command="git push origin HEAD:refs/for/"${branch_name}%${reviewers}
+    echo $push_command
+    eval $push_command
+}
+```
