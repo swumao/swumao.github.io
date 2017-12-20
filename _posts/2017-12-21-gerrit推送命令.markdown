@@ -15,7 +15,8 @@ git push origin HEAD:refs/for/master%r=zhangsan@lianjia.com,r=lisi@lianjia.com
 
 也曾想过写一个alias简化输入，也有现成的插件可以直接在IDE中指定，还有同事通过git的相关设置自动加reviewers，但这些操作都没有解决一件事情，那就是在不同的项目中提交不同的代码时需要指定不同的reviewers时不太好办，现在工作中在使用的就是写死固定给所有人发，这样大家的体验会比较差，比如如果开通提醒功能，则会被大量的无关信息骚扰；如果关闭提醒功能则导致review不及时。因此需要一个既可以简化输入，又可以动态指定reviewers的小工具。
 
-用法
+用法: 将下面的代码加入到你的`~/.zshrc` 或者 `~/.bashrc` 中，执行 `source ~/.zshrc`
+
 ```
 review all 
 review group1
@@ -24,6 +25,9 @@ review group1 user4
 ```
 
 ```bash
+/**
+ * @see https://gist.github.com/swumao/87c8e2d0b856beb143730906fa3c58f6
+ */
 review () {
     if [ $# != 1 ];then
         echo "Usage: review 组名或链家网邮箱前缀 [组名或链家网邮箱前缀...]"
